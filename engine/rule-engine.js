@@ -1,0 +1,40 @@
+const RULE_STATE = require("./rule-states");
+
+function runRules(user, rules, options = { mode: "FAIL_FAST" }) {
+  const results = {};
+  const errors = [];
+
+  for (const rule of rules) {
+    const result = rule.run(user);
+
+    results[rule.name] = result;
+
+    if (result.state === RULE_STATE.FAILED) {
+      if (options.mode === "FAIL-FAST") {
+        return {
+          passed: false,
+          error: result.error,
+          results,
+        };
+      }
+
+      errors.push(result.error);
+    }
+  }
+
+  if (errors.length > 0) {
+    return {
+      passed: false,
+      errors,
+      results,
+    };
+  }
+
+  return {
+    passed: true,
+    error: null,
+    results,
+  };
+}
+
+module.exports = runRules;
