@@ -1,3 +1,19 @@
+/**
+ * Rule Engine Context Contract
+ *
+ * Engine ini mengasumsikan semua rule menerima `context`
+ * dengan struktur FLAT (tidak nested).
+ *
+ * Contoh:
+ * {
+ *   active: true,
+ *   kycVerified: true,
+ *   amlCleared: false,
+ *   age: 25
+ * }
+ */
+
+
 const RULE_STATE = require("./rule-states");
 
 function runRules(user, rules, options = { mode: "FAIL_FAST" }) {
