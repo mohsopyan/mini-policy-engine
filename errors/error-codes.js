@@ -1,7 +1,7 @@
 const ERROR_CODES = {
-  USER_INACTIVE: {
-    code: "USER_INACTIVE",
-    message: "User is not active",
+  INACTIVE_ACCOUNT: {
+    code: "INACTIVE_ACCOUNT",
+    message: "Account is not active",
   },
 
   KYC_NOT_VERIFIED: {
@@ -20,4 +20,4 @@ const ERROR_CODES = {
   },
 };
 
-module.expports = ERROR_CODES;
+module.exports = ERROR_CODES;
