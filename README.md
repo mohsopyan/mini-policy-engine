@@ -8,14 +8,20 @@ Project ini dirancang bertahap untuk menunjukkan:
 - Cara berpikir arsitektural (bukan sekadar coding)
 - Pendekatan yang human-readable dan maintainable
 
+## Design Philosophy
+This project intentionally avoids frameworks and abstractions
+that hide control flow. Every decision is explicit and traceable,
+mirroring how real-world policy engines are reasoned about in production systems.
+
 ## Current Status
 - [x] Project structure
 - [x] Rule registry
 - [x] Policy resolver
 - [x] Action policies
-- [ ] Rules implementation
-- [ ] Engine execution
-- [ ] Integration tests
+- [x] Core rules (Active, KYC, AML, Age)
+- [x] Rule Engine (fail-fast mode)
+- [ ] Full evaluation mode
+- [ ] Integration & scenario tests
 
 ## Goal
 Project ini dibuat sebagai bagian dari:
