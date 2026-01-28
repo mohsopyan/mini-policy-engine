@@ -17,18 +17,21 @@ registry.register(kycRule);
 registry.register(amlRule);
 registry.register(ageRule);
 
-const action = "WITHDRAW";
+// const action = "WITHDRAW";
+const action = "TRANSFER";
+
+const mode = "FAIL_FAST";
 
 const rulesToRun = policyResolver.resolve(action);
 
 const context = {
-    active: true,
-    kycVerified: true,
-    amlCleared: false,
-    age: 25,
+  active: true,
+  kycVerified: true,
+  amlCleared: false,
+  age: 25,
 };
 
-const decision = runRules(context, rulesToRun);
+const decision = runRules(context, rulesToRun, { mode });
 
 console.log("Decision result:");
 console.dir(decision, { depth: null });

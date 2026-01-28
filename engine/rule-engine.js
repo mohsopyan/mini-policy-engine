@@ -26,7 +26,7 @@ function runRules(user, rules, options = { mode: "FAIL_FAST" }) {
     results[rule.name] = result;
 
     if (result.state === RULE_STATE.FAILED) {
-      if (options.mode === "FAIL-FAST") {
+      if (options.mode === "FAIL_FAST") {
         return {
           passed: false,
           error: result.error,
