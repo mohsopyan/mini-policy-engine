@@ -13,15 +13,14 @@
  * }
  */
 
-
 const RULE_STATE = require("./rule-states");
 
-function runRules(user, rules, options = { mode: "FAIL_FAST" }) {
+function runRules(context, rules, options = { mode: "FAIL_FAST" }) {
   const results = {};
   const errors = [];
 
   for (const rule of rules) {
-    const result = rule.run(user);
+    const result = rule.run(context);
 
     results[rule.name] = result;
 
@@ -34,7 +33,9 @@ function runRules(user, rules, options = { mode: "FAIL_FAST" }) {
         };
       }
 
-      errors.push(result.error);
+      if (options.mode === "FULL") {
+        errors.push(result.error);
+      }
     }
   }
 
@@ -48,7 +49,7 @@ function runRules(user, rules, options = { mode: "FAIL_FAST" }) {
 
   return {
     passed: true,
-    error: null,
+    errors: [],
     results,
   };
 }
