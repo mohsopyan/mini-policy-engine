@@ -20,7 +20,7 @@ mirroring how real-world policy engines are reasoned about in production systems
 - [x] Action policies
 - [x] Core rules (Active, KYC, AML, Age)
 - [x] Rule Engine (fail-fast mode)
-- [ ] Full evaluation mode
+- [x] Full evaluation mode
 - [ ] Integration & scenario tests
 
 ## Goal
