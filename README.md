@@ -21,7 +21,7 @@ mirroring how real-world policy engines are reasoned about in production systems
 - [x] Core rules (Active, KYC, AML, Age)
 - [x] Rule Engine (fail-fast mode)
 - [x] Full evaluation mode
-- [ ] Integration & scenario tests
+- [x] Integration & scenario tests(fail-fast vs full)
 
 ## Goal
 Project ini dibuat sebagai bagian dari:
