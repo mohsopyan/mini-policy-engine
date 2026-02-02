@@ -49,7 +49,6 @@ function runRules(context, rules, options = { mode: "FAIL_FAST" }) {
 
   return {
     passed: true,
-    errors: [],
     results,
   };
 }
