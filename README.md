@@ -27,10 +27,12 @@ Returned when all rules pass.
     ruleName: { state: "PASSED", error: null }
   }
 }
+```
 
 ### Fail-fast Mode
-Evaluation stops at the first failed rule
+Evaluation stops at the first failed rule.
 
+```js
 {
   passed: false,
   error: { ... },
@@ -38,10 +40,12 @@ Evaluation stops at the first failed rule
     failedRule: { state: "FAILED", error: { ... } }
   }
 }
+```
 
 ### Full Evaluation Mode
 All rules are evaluated and all errors are collected.
 
+```js
 {
   passed: false,
   errors: [ { ... }, { ... } ],
@@ -50,6 +54,7 @@ All rules are evaluated and all errors are collected.
     ruleB: { state: "PASSED", error: null }
   }
 }
+```
 
 This explicit contract ensures the caller never needs to infer intent
 from empty arrays or nullable fields.
