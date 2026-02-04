@@ -28,6 +28,36 @@ Returned when all rules pass.
   }
 }
 
+### Fail-fast Mode
+Evaluation stops at the first failed rule
+
+{
+  passed: false,
+  error: { ... },
+  results: {
+    failedRule: { state: "FAILED", error: { ... } }
+  }
+}
+
+### Full Evaluation Mode
+All rules are evaluated and all errors are collected.
+
+{
+  passed: false,
+  errors: [ { ... }, { ... } ],
+  results: {
+    ruleA: { state: "FAILED", error: { ... } },
+    ruleB: { state: "PASSED", error: null }
+  }
+}
+
+This explicit contract ensures the caller never needs to infer intent
+from empty arrays or nullable fields.
+
+## Extensibility: Adding New Action Without Modifying the Engine
+This engine is designedto be closed for modification and open for extension.
+
+Adding a new business action (e.g. WITHDRAW) does not require any change to the rule engine or existing rules.
 
 ## Current Status
 - [x] Project structure
@@ -37,8 +67,9 @@ Returned when all rules pass.
 - [x] Core rules (Active, KYC, AML, Age)
 - [x] Rule Engine (fail-fast mode)
 - [x] Full evaluation mode
-- [x] Integration & scenario tests(fail-fast, full, success)
+- [x] Integration & scenario tests(fail-fast, full, success, withdraw)
 - [x] Explicit decision output contract
+- [x] Proven extensibility via policy configuration.
 
 ## Goal
 Project ini dibuat sebagai bagian dari:
