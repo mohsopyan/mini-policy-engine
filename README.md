@@ -64,6 +64,24 @@ This engine is designedto be closed for modification and open for extension.
 
 Adding a new business action (e.g. WITHDRAW) does not require any change to the rule engine or existing rules.
 
+## Rule Dependency
+
+In real-world systems, not all rules are independent.
+Some rules should only run if prerequisite checks have passed.
+
+This engine supports **rule dependency at the policy level**.
+
+### Example
+
+```js
+TRANSFER: [
+  "activeRule",
+  "kycRule",
+  { rule: "amlRule", dependsOn: "kycRule" },
+  "ageRule"
+]
+```
+
 ## Current Status
 - [x] Project structure
 - [x] Rule registry
