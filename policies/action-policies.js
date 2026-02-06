@@ -1,5 +1,10 @@
 module.exports = {
   REGISTER: ["activeRule", "ageRule"],
   WITHDRAW: ["activeRule", "kycRule"],
-  TRANSFER: ["activeRule", "kycRule", "amlRule", "ageRule"],
+  TRANSFER: [
+    "activeRule",
+    "kycRule",
+    { rule: "amlRule", dependsOn: "kycRule" },
+    "ageRule"
+  ]
 };

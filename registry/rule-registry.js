@@ -1,29 +1,41 @@
 class RuleRegistry {
-    constructor() {
-        this.rules = new Map();
+  constructor() {
+    this.rules = new Map();
+  }
+
+  register(rule) {
+    if (!rule.name) {
+      throw new Error("Rule must have a name");
     }
 
-    register(rule) {
-        if (!rule.name) {
-            throw new Error("Rule must have a name");
-        }
+    this.rules.set(rule.name, rule);
+  }
 
-        this.rules.set(rule.name, rule);
+  get(name) {
+    const rule = this.rules.get(name);
+
+    if (!rule) {
+      throw new Error(`Rule ${name} not found in registry`);
     }
 
-    get(name) {
-        const rule = this.rules.get(name);
+    return rule;
+  }
 
-        if(!rule) {
-            throw new Error(`Rule ${name} not found in registry`);
-        }
+  resolve(entries) {
+    return entries.map(entry => {
+      if (typeof entry === "string") {
+        return {
+          rule: this.get(entry),
+          dependsOn: null,
+        };
+      }
 
-        return rule;
-    }
-
-    resolve(ruleNames) {
-        return ruleNames.map((name) => this.get(name));
-    }
+      return {
+        rule: this.get(entry.rule),
+        dependsOn: entry.dependsOn
+      }
+    });
+  }
 }
 
 module.exports = RuleRegistry;
