@@ -9,17 +9,23 @@ function runRules(context, rules, options = { mode: "FAIL_FAST" }) {
     const { rule, dependsOn } = entry;
 
     if (dependsOn) {
-      const dependencyResult = executedResults[dependsOn];
+      const dependencies = Array.isArray(dependsOn) ? dependsOn : [dependsOn];
 
-      if (!dependencyResult || dependencyResult.state !== RULE_STATE.PASSED) {
+      const unmet = dependencies.some((dep) => {
+        const depResult = executedResults[dep];
+        return !depResult || depResult.state !== RULE_STATE.PASSED;
+      });
+
+      if (unmet) {
         results[rule.name] = {
           state: RULE_STATE.SKIPPED,
-          error: null
+          error: null,
         };
         executedResults[rule.name] = results[rule.name];
         continue;
       }
-    } 
+    }
+
     const result = rule.run(context);
 
     results[rule.name] = result;

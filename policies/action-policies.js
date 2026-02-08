@@ -4,7 +4,7 @@ module.exports = {
   TRANSFER: [
     "activeRule",
     "kycRule",
-    { rule: "amlRule", dependsOn: "kycRule" },
+    { rule: "amlRule", dependsOn: ["kycRule", "activeRule"] },
     "ageRule"
   ]
 };
