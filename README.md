@@ -82,6 +82,26 @@ TRANSFER: [
 ]
 ```
 
+## Decision Summary Layer
+
+In addition to raw engine output, this project provides a
+Decision Summary layer that translates technical decisions
+into human-readable explanations.
+
+Example:
+
+```js
+{
+  action: "TRANSFER",
+  allowed: false,
+  reason: "TRANSFER blocked because account is inactive",
+  details: [
+    "kycRule passed",
+    "amlRule skipped due to dependency"
+  ]
+}
+```
+
 ## Current Status
 - [x] Project structure
 - [x] Rule registry
