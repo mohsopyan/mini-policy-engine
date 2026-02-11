@@ -1,0 +1,19 @@
+{
+  "name": "mini-policy-engine",
+  "version": "1.0.0",
+  "description": "Mini Policy Engine adalah project pembelajaran yang mensimulasikan\r bagaimana sistem policy / rule engine bekerja di dunia nyata.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
