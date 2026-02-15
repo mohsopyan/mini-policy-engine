@@ -18,19 +18,13 @@ registry.register(ageRule);
 const policyResolver = new PolicyResolver(registry, actionPolicies);
 
 function transferDecisionHandler(req, res) {
-    try {
-        const context = req.body;
-        const rules = policyResolver.resolve("TRANSFER");
+  const context = req.body;
+  const rules = policyResolver.resolve("TRANSFER");
 
-        const decision = runRules(context, rules, { mode: "FULL" });
-        const summary = summarizeDecision(decision, "TRANSFER");
+  const decision = runRules(context, rules, { mode: "FULL" });
+  const summary = summarizeDecision(decision, "TRANSFER");
 
-        return res.status(200).json(summary);
-    } catch (error) {
-        return res.status(500).json({
-            message: "Internal server error"
-        });
-    }
+  return res.status(200).json(summary);
 }
 
 module.exports = transferDecisionHandler;

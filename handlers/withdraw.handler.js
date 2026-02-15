@@ -17,20 +17,15 @@ registry.register(ageRule);
 
 const policyResolver = new PolicyResolver(registry, actionPolicies);
 
-function withdrawDecisionHandler(req, res) {
-  try {
-    const context = req.body;
-    const rules = policyResolver.resolve("WITHDRAW");
+function withdrawDecisionHandler(req, res, next) {
+  // throw new Error("TEST GLOBAL ERROR"); -> test global error
+  const context = req.body;
+  const rules = policyResolver.resolve("WITHDRAW");
 
-    const decision = runRules(context, rules, { mode: "FULL" });
-    const summary = summarizeDecision(decision, "WITHDRAW");
+  const decision = runRules(context, rules, { mode: "FULL" });
+  const summary = summarizeDecision(decision, "WITHDRAW");
 
-    return res.status(200).json(summary);
-  } catch (error) {
-    return res.status(500).json({
-      message: "Internal server error",
-    });
-  }
+  return res.status(200).json(summary);
 }
 
 module.exports = withdrawDecisionHandler;
