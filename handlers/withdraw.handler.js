@@ -17,8 +17,8 @@ registry.register(ageRule);
 
 const policyResolver = new PolicyResolver(registry, actionPolicies);
 
-function withdrawDecisionHandler(req, res, next) {
-  // throw new Error("TEST GLOBAL ERROR"); -> test global error
+async function withdrawDecisionHandler(req, res) {
+  // throw new Error("TEST ERROR");
   const context = req.body;
   const rules = policyResolver.resolve("WITHDRAW");
 

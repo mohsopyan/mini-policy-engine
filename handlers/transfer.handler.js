@@ -17,7 +17,8 @@ registry.register(ageRule);
 
 const policyResolver = new PolicyResolver(registry, actionPolicies);
 
-function transferDecisionHandler(req, res) {
+async function transferDecisionHandler(req, res) {
+  // throw new Error("TEST ERROR");
   const context = req.body;
   const rules = policyResolver.resolve("TRANSFER");
 
