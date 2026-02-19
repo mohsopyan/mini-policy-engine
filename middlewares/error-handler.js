@@ -1,5 +1,11 @@
+const logger = require("../utils/logger");
+
 function errorHandler(err, req, res, next) {
-  console.error("GLOBAL ERROR:", err.message);
+  logger.error("Unhandled error", {
+    message: err.message,
+    path: req.originalUrl,
+    method: req.method,
+  })
 
   if (res.headersSent) {
     return next(err);

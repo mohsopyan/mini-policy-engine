@@ -1,7 +1,12 @@
 const express = require("express");
 const app = express();
+const requestId = require("./middlewares/request-id.js")
+const requestLogger = require("./middlewares/request-logger.js");
 
 app.use(express.json());
+
+app.use(requestId);
+app.use(requestLogger);
 
 const decisionRoutes = require("./api/routes/decision.routes.js");
 const errorHandler = require("./middlewares/error-handler.js");
