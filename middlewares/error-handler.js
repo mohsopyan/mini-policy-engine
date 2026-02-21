@@ -1,19 +1,22 @@
 const logger = require("../utils/logger");
 
 function errorHandler(err, req, res, next) {
-  logger.error("Unhandled error", {
+  const statusCode = err.statusCode || 500;
+  const code = err.code || "INTERNAL_SERVER_ERROR";
+  const message = statusCode === 500 ? "Something went wrong" : err.message;
+
+  logger.error({
     message: err.message,
-    path: req.originalUrl,
+    requestId: req.requestId,
     method: req.method,
-  })
+    path: req.originalUrl,
+    stack: err.stack,
+  });
 
-  if (res.headersSent) {
-    return next(err);
-  }
-
-  return res.status(500).json({
-    error: "INTERNAL_SERVER_ERROR",
-    message: err.message || "Something went wrong",
+  res.status(statusCode).json({
+    error: code,
+    message,
+    requestId: req.requestId,
   });
 }
 

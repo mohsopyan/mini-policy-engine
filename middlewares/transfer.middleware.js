@@ -1,13 +1,11 @@
 const validateTransferInput = require("../validators/transfer.validator");
+const ValidationError = require("../errors/validation-error");
 
 function validateTransferMiddleware(req, res, next) {
   const result = validateTransferInput(req.body);
 
   if (!result.valid) {
-    return res.status(400).json({
-      error: "INVALID_INPUT",
-      details: result.errors,
-    });
+    throw new ValidationError(result.errors.join(", "));
   }
 
   next();
